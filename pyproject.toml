@@ -39,10 +39,10 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/IIIIQIIII/claude-finance-agent"
-Repository = "https://github.com/IIIIQIIII/claude-finance-agent"
-Documentation = "https://github.com/IIIIQIIII/claude-finance-agent#readme"
-Issues = "https://github.com/IIIIQIIII/claude-finance-agent/issues"
+Homepage = "https://github.com/Alpha-Cortex-AI/claude-finance-agent"
+Repository = "https://github.com/Alpha-Cortex-AI/claude-finance-agent"
+Documentation = "https://github.com/Alpha-Cortex-AI/claude-finance-agent#readme"
+Issues = "https://github.com/Alpha-Cortex-AI/claude-finance-agent/issues"
 
 [project.scripts]
 finance-analyzer = "scripts.finance_analyzer:main"
