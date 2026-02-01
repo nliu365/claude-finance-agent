@@ -1,5 +1,9 @@
 FROM python:3.11-slim
 
+LABEL org.opencontainers.image.source="https://github.com/nliu365/claude-finance-agent"
+LABEL org.opencontainers.image.description="Claude Finance Agent Green Agent"
+LABEL org.opencontainers.image.licenses="MIT"
+
 ENV PYTHONUNBUFFERED=1 \
     PIP_DISABLE_PIP_VERSION_CHECK=1 \
     PIP_NO_CACHE_DIR=1
