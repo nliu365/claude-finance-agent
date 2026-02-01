@@ -6,6 +6,18 @@ An intelligent financial analysis system powered by Claude AI that autonomously 
 
 Claude Finance Agent uses the Claude Agent SDK to deploy multiple specialized AI agents that work in parallel to analyze different sections of SEC 10-K filings. Each agent autonomously discovers and explores relevant sections, providing comprehensive financial analysis with multi-dimensional scoring and investment recommendations.
 
+## AgentBeats Phase 1 Submission
+
+Phase 1 artifacts are tracked in this repo, including:
+- Dockerized Green Agent: `Dockerfile`
+- Baseline Purple Agent: `purple_agent/server.py`
+- Reproducibility: `docs/reproducibility.md`
+
+## Finance Agent Benchmark Port (arXiv: 2508.00828)
+
+This repo includes a minimal port of the Finance Agent benchmark under `benchmarks/finance_agent/`.
+See `benchmarks/finance_agent/README.md` for setup, tool keys, and how to run the end-to-end harness.
+
 ## Features
 
 - **Smart Section Discovery**: Agents autonomously identify and analyze relevant 10-K sections
@@ -135,6 +147,15 @@ echo "ANTHROPIC_API_KEY=your-api-key-here" > .env
 uv run python -c "import claude_agent_sdk; import anthropic; print('✅ Installation successful!')"
 ```
 
+### Docker (Green Agent)
+
+Build and run the Green Agent end-to-end with the sample 10-K data:
+
+```bash
+docker build -t claude-finance-agent .
+docker run --rm -e ANTHROPIC_API_KEY=your-api-key-here claude-finance-agent
+```
+
 ## Usage
 
 ### Quick Demo
@@ -190,6 +211,24 @@ Example:
 uv run python scripts/batch_analyzer.py data/10k_2020_10_critical_sections data/results 5
 ```
 
+### Baseline Purple Agent (A2A-Compatible)
+
+Run the baseline Purple Agent HTTP server:
+
+```bash
+python purple_agent/server.py
+```
+
+Send predictions requests via the Green Agent runner:
+
+```bash
+python scripts/run_agent.py \
+  --input evaluation/sample_labels.jsonl \
+  --out evaluation/purple_outputs.jsonl \
+  --use-purple \
+  --purple-endpoint http://localhost:8000
+```
+
 ## Project Structure
 
 ```
@@ -211,6 +250,8 @@ claude-finance-agent/
 ├── setup_env.sh               # Environment setup script (pip/venv)
 ├── setup_uv.sh                # Environment setup script (uv)
 ├── run_demo.sh                # Quick demo script
+├── Dockerfile                 # Dockerized Green Agent
+├── purple_agent/              # Baseline Purple Agent (A2A-compatible)
 └── README.md                  # This file
 ```
 
@@ -263,6 +304,13 @@ Analysis results are saved as JSON files with the following structure:
   }
 }
 ```
+
+## Reproducibility
+
+Two identical evaluations with the same configuration are recorded in:
+- `docs/reproducibility.md`
+- `evaluation/repro_run_1.jsonl`, `evaluation/repro_run_2.jsonl`
+- `evaluation/repro_eval_1.json`, `evaluation/repro_eval_2.json`
 
 ## Scoring System
 

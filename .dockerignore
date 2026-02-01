@@ -1,0 +1,12 @@
+.venv
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+*.swp
+*.egg-info
+.cache
+.git
+.gitignore
+.DS_Store
+data/results

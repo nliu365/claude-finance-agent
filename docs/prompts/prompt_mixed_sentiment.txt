@@ -1,0 +1,27 @@
+
+TASK: Identify sentences with mixed sentiment (both positive and negative elements) in the MD&A text.
+Split complex sentences into sub-statements where possible and score each component.
+
+OUTPUT: JSON array of objects with the following fields:
+- original_sentence: The full sentence containing mixed sentiment
+- sub_statements: Array of objects, each with:
+  - text: The sub-statement text
+  - sentiment_score: Float from -1.0 to +1.0
+  - sentiment_label: One of strongly_negative, negative, slightly_negative, neutral, slightly_positive, positive, strongly_positive
+  - is_positive: Boolean indicating if this sub-statement is positive
+- aggregated_score: Weighted average of sub-statement scores
+- aggregation_method: "mean" or "weighted_by_length"
+- justification: Explanation of how the aggregated score was derived
+- provenance: Optional object with paragraph_index, char_start, char_end
+
+MIXED SENTIMENT INDICATORS:
+- Conjunctions: "but", "however", "although", "despite", "while", "on the other hand"
+- Contrast patterns: "increased... offset by", "growth in... decline in", "benefited... impacted by"
+- Hedge words: "partially", "somewhat", "to some extent", "largely offset"
+
+INSTRUCTIONS:
+- Focus on sentences that contain both positive and negative sentiment elements.
+- Use clause boundaries (commas, semicolons, conjunctions) to split sub-statements.
+- Weight sub-statements by importance or length when computing aggregated score.
+- Return at most 5 items; prioritize the most clearly mixed sentences.
+- If no mixed sentiment sentences found, return an empty array.

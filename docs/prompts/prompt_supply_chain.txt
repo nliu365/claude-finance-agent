@@ -1,0 +1,13 @@
+TASK: For the provided MD&A text, locate statements about supply_chain.
+OUTPUT: JSON array of objects with fields: sentence, sentiment_score (-1.0..1.0), sentiment_label, justification, provenance (optional).
+INSTRUCTIONS: Return at most 5 items; pick the most representative sentences. If none found, return an empty array.
+
+
+SENTIMENT SCORING RUBRIC:
+- +0.8 to +1.0 (strongly_positive): Explicit positive outlook. Keywords: "significant opportunity", "strong benefit", "favorable", "exceeded expectations".
+- +0.4 to +0.7 (positive): Generally positive but less certain. Keywords: "expect to benefit", "could improve", "positive trend", "confident".
+- +0.1 to +0.3 (slightly_positive): Acknowledges positive factor but minimal impact. Keywords: "modest improvement", "limited upside".
+- 0.0 (neutral): Purely factual, no emotional language. Keywords: "remained stable", "unchanged", "immaterial effect".
+- -0.1 to -0.3 (slightly_negative): Minimal negative impact. Keywords: "modest headwind", "minor pressure", "manageable".
+- -0.4 to -0.7 (negative): Clear negative but not catastrophic. Keywords: "headwind", "unfavorable", "negatively impacted", "pressure", "challenging".
+- -0.8 to -1.0 (strongly_negative): Explicit severe risk. Keywords: "materially adverse", "significant downturn", "severe risk", "critical threat".

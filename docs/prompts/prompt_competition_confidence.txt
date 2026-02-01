@@ -1,0 +1,24 @@
+
+TASK: Extract mentions of competition condition changes from the MD&A text.
+For each mention, classify the company's confidence level to succeed against competition.
+
+OUTPUT: JSON array of objects with the following fields:
+- sentence: The extracted sentence mentioning competition
+- confidence_level: One of "optimistic", "neutral", or "pessimistic"
+- confidence_score: Float from -1.0 (very pessimistic) to +1.0 (very optimistic)
+- competitive_factors: List of specific competitive factors mentioned (e.g., "market_share", "pricing_power", "innovation", "new_entrants")
+- justification: Brief rationale for the classification
+- provenance: Optional object with paragraph_index, char_start, char_end
+
+CONFIDENCE SCORING RUBRIC:
+- Optimistic (+0.4 to +1.0): Company expresses confidence in competitive position.
+  Keywords: "confident", "well-positioned", "competitive advantage", "gain share", "differentiated", "leading position".
+- Neutral (-0.3 to +0.3): Acknowledges competition without clear positive or negative outlook.
+  Keywords: "competitive landscape", "market dynamics", "industry trends", "comparable to peers".
+- Pessimistic (-1.0 to -0.4): Expresses concern about competitive threats.
+  Keywords: "intensifying competition", "market share loss", "pricing pressure from competitors", "new entrants threatening".
+
+INSTRUCTIONS:
+- Return at most 5 items; prioritize the most representative sentences.
+- Consider both explicit statements about competitors and implicit competitive positioning.
+- If no competition mentions found, return an empty array.

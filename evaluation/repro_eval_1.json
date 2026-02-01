@@ -1,0 +1,55 @@
+{
+  "items": 24,
+  "identification": 1.0,
+  "sentiment_basic": 0.957,
+  "sentiment_tolerance": 0.9383,
+  "sentiment_label": 0.9444,
+  "sentiment": 0.9451,
+  "composite": 0.9671,
+  "tolerance_used": 0.1,
+  "mixed_sentiment_count": 3,
+  "mixed_sentiment_analysis": {
+    "count": 3,
+    "items": [
+      {
+        "id": "s5",
+        "is_mixed": true,
+        "indicators": [
+          "but"
+        ],
+        "gt_clauses": [
+          "supply chain disruptions caused delays",
+          "were manageable"
+        ],
+        "gt_score": -0.2,
+        "pred_score": -0.08
+      },
+      {
+        "id": "s13",
+        "is_mixed": true,
+        "indicators": [
+          "despite"
+        ],
+        "gt_clauses": [
+          "we have experienced modest margin expansion",
+          "despite cost headwinds"
+        ],
+        "gt_score": 0.3,
+        "pred_score": 0.224
+      },
+      {
+        "id": "s18",
+        "is_mixed": true,
+        "indicators": [
+          "but"
+        ],
+        "gt_clauses": [
+          "regulatory reviews are ongoing",
+          "but we do not expect material changes"
+        ],
+        "gt_score": 0.0,
+        "pred_score": -0.129
+      }
+    ]
+  }
+}

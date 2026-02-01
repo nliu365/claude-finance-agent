@@ -1,0 +1,162 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MD&A Sentiment Label Schema",
+  "description": "Schema for ground-truth labels used in MD&A macro-factor sentiment analysis evaluation. Supports standard factor analysis, competition confidence (Ning's idea #1), and outlook performance (Ning's idea #2).",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for this labeled snippet"
+    },
+    "source_file": {
+      "type": "string",
+      "description": "Source 10-K JSON filename"
+    },
+    "sentence": {
+      "type": "string",
+      "description": "The sentence or snippet text being labeled"
+    },
+    "factor": {
+      "type": "string",
+      "enum": [
+        "interest_rates",
+        "fx",
+        "inflation",
+        "competition",
+        "supply_chain",
+        "regulation",
+        "trade_policy",
+        "competition_confidence",
+        "outlook_performance",
+        "mixed_sentiment",
+        "other"
+      ],
+      "description": "The macro factor being analyzed. Extended with competition_confidence, outlook_performance, and mixed_sentiment for Ning's task extensions."
+    },
+    "sentiment_score": {
+      "type": "number",
+      "minimum": -1.0,
+      "maximum": 1.0,
+      "description": "Numeric sentiment score from -1.0 (very negative) to +1.0 (very positive)"
+    },
+    "sentiment_label": {
+      "type": "string",
+      "enum": [
+        "strongly_negative",
+        "negative",
+        "slightly_negative",
+        "neutral",
+        "slightly_positive",
+        "positive",
+        "strongly_positive"
+      ],
+      "description": "Categorical sentiment label corresponding to the score range"
+    },
+    "justification": {
+      "type": "string",
+      "description": "Brief rationale for the assigned score"
+    },
+    "annotator": {
+      "type": "string",
+      "description": "Annotator ID or initials"
+    },
+    "annotated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO datetime when annotation was created"
+    },
+    "provenance": {
+      "type": "object",
+      "description": "Optional linking info (paragraph index, character offsets)",
+      "properties": {
+        "paragraph_index": {"type": "integer"},
+        "char_start": {"type": "integer"},
+        "char_end": {"type": "integer"}
+      }
+    },
+    "clauses": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "For mixed sentiment: list of sub-clauses extracted from the sentence"
+    },
+    "confidence_level": {
+      "type": "string",
+      "enum": ["optimistic", "neutral", "pessimistic"],
+      "description": "For competition_confidence factor: company's confidence to succeed"
+    },
+    "competitive_factors": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "For competition_confidence: specific competitive factors mentioned (e.g., market_share, pricing_power)"
+    },
+    "performance_classification": {
+      "type": "string",
+      "enum": ["over_performance", "neutral", "under_performance"],
+      "description": "For outlook_performance factor: how results compare to prior guidance"
+    },
+    "metrics_mentioned": {
+      "type": "array",
+      "items": {"type": "string"},
+      "description": "For outlook_performance: specific metrics referenced (e.g., revenue_growth, margin)"
+    },
+    "comparison_basis": {
+      "type": "string",
+      "description": "For outlook_performance: what the outlook is compared against (e.g., prior_guidance, last_year)"
+    },
+    "numeric_values": {
+      "type": "object",
+      "description": "For outlook_performance: extracted numeric values for comparison",
+      "properties": {
+        "current_value": {"type": "number"},
+        "prior_value": {"type": "number"},
+        "change_percent": {"type": "number"}
+      }
+    },
+    "sub_statements": {
+      "type": "array",
+      "description": "For mixed_sentiment: array of sub-statement analyses",
+      "items": {
+        "type": "object",
+        "properties": {
+          "text": {"type": "string"},
+          "sentiment_score": {"type": "number", "minimum": -1.0, "maximum": 1.0},
+          "sentiment_label": {"type": "string"},
+          "is_positive": {"type": "boolean"}
+        }
+      }
+    },
+    "aggregation_method": {
+      "type": "string",
+      "enum": ["mean", "weighted_by_length"],
+      "description": "For mixed_sentiment: how sub-statement scores were aggregated"
+    }
+  },
+  "required": [
+    "id",
+    "source_file",
+    "sentence",
+    "factor",
+    "sentiment_score",
+    "sentiment_label",
+    "annotator",
+    "annotated_at"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {"factor": {"const": "competition_confidence"}}
+      },
+      "then": {
+        "required": ["confidence_level"]
+      }
+    },
+    {
+      "if": {
+        "properties": {"factor": {"const": "outlook_performance"}}
+      },
+      "then": {
+        "required": ["performance_classification"]
+      }
+    }
+  ]
+}

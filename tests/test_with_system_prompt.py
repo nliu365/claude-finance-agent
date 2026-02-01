@@ -25,7 +25,8 @@ async def list_available_sections(args):
         return {"content": [{"type": "text", "text": f"Error: {e}"}]}
 
 
-async def test_with_prompt(use_system_prompt: bool):
+async def run_with_prompt(use_system_prompt: bool):
+    """Helper function to test with/without system_prompt. Not a pytest test."""
     print(f"\n{'='*60}")
     print(f"测试: {'WITH' if use_system_prompt else 'WITHOUT'} system_prompt")
     print('='*60)
@@ -93,9 +94,9 @@ async def main():
     print("对比测试：system_prompt 的影响")
     print("="*60)
     
-    await test_with_prompt(use_system_prompt=False)
+    await run_with_prompt(use_system_prompt=False)
     await asyncio.sleep(1)
-    await test_with_prompt(use_system_prompt=True)
+    await run_with_prompt(use_system_prompt=True)
 
 
 if __name__ == "__main__":

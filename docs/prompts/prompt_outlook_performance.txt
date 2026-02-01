@@ -1,0 +1,26 @@
+
+TASK: Analyze outlook statements and guidance in the MD&A text.
+Compare current outlook/guidance with previous guidance or prior period performance to determine if the company is performing over/neutral/under expectations.
+
+OUTPUT: JSON array of objects with the following fields:
+- sentence: The extracted outlook or guidance statement
+- performance_classification: One of "over_performance", "neutral", or "under_performance"
+- performance_score: Float from -1.0 (significantly under) to +1.0 (significantly over)
+- metrics_mentioned: List of specific metrics referenced (e.g., "revenue_growth", "margin", "eps", "market_share")
+- comparison_basis: What the outlook is compared against (e.g., "prior_guidance", "last_year", "consensus", "industry_average")
+- numeric_values: Optional object with extracted numbers (current_value, prior_value, change_percent)
+- justification: Brief rationale for the classification
+- provenance: Optional object with paragraph_index, char_start, char_end
+
+PERFORMANCE SCORING RUBRIC:
+- Over Performance (+0.4 to +1.0): Results/outlook exceed prior guidance or expectations.
+  Keywords: "exceeded expectations", "above guidance", "beat", "outperformed", "raised outlook", "better than expected".
+- Neutral (-0.3 to +0.3): Results/outlook in line with prior guidance.
+  Keywords: "in line with", "consistent with guidance", "as expected", "on track", "reaffirmed".
+- Under Performance (-1.0 to -0.4): Results/outlook below prior guidance or expectations.
+  Keywords: "below expectations", "missed guidance", "lowered outlook", "underperformed", "revised down".
+
+INSTRUCTIONS:
+- Return at most 5 items; prioritize statements with explicit numeric comparisons.
+- Look for year-over-year comparisons, guidance updates, and forward-looking statements.
+- If no outlook/guidance statements found, return an empty array.

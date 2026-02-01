@@ -1,0 +1,12 @@
+{"id": "s1", "factor": "interest_rates", "sentiment_score": -0.55, "support_sentences": ["Rising interest rates have created a headwind for our loan growth and margins."]}
+{"id": "s2", "factor": "inflation", "sentiment_score": 0.45, "support_sentences": ["We expect modest revenue growth as pricing improvements offset cost pressures."]}
+{"id": "s3", "factor": "fx", "sentiment_score": -0.3, "support_sentences": ["Foreign exchange headwinds reduced reported revenue compared with last year."]}
+{"id": "s4", "factor": "competition", "sentiment_score": 0.6, "support_sentences": ["We continue to see favorable demand trends in our key markets."]}
+{"id": "s5", "factor": "supply_chain", "sentiment_score": -0.1, "support_sentences": ["Supply chain disruptions caused delays but were manageable."]}
+{"id": "s6", "factor": "regulation", "sentiment_score": -0.05, "support_sentences": ["New regulations may require changes to our reporting practices."]}
+{"id": "s7", "factor": "trade_policy", "sentiment_score": -0.4, "support_sentences": ["Tariffs could increase our costs in affected markets."]}
+{"id": "s8", "factor": "competition", "sentiment_score": 0.75, "support_sentences": ["We are confident in our ability to gain share through innovation."]}
+{"id": "s9", "factor": "inflation", "sentiment_score": -0.55, "support_sentences": ["Inflationary pressures increased input costs, pressuring margins."]}
+{"id": "s10", "factor": "interest_rates", "sentiment_score": 0.05, "support_sentences": ["Interest rate volatility had minimal impact on our investment portfolio."]}
+{"id": "s11", "factor": "other", "sentiment_score": 0.5, "support_sentences": ["We expect full-year guidance to be at the high end of the range."]}
+{"id": "s12", "factor": "trade_policy", "sentiment_score": -0.65, "support_sentences": ["Certain markets remain uncertain due to geopolitical tensions."]}
