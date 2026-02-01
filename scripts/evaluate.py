@@ -29,14 +29,29 @@ import json
 from pathlib import Path
 from typing import List, Dict, Optional, Tuple
 
-from scripts.scoring_rubric import (
-    SentimentLabel,
-    score_to_label,
-    sentiment_match_with_tolerance,
-    label_match_score,
-    detect_mixed_sentiment_indicators,
-    DEFAULT_TOLERANCE,
-)
+try:
+    from scripts.scoring_rubric import (
+        SentimentLabel,
+        score_to_label,
+        sentiment_match_with_tolerance,
+        label_match_score,
+        detect_mixed_sentiment_indicators,
+        DEFAULT_TOLERANCE,
+    )
+except ModuleNotFoundError:
+    # Allow running as a script or via pytest without requiring scripts/ to be a package.
+    import sys
+    from pathlib import Path
+
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from scoring_rubric import (  # type: ignore
+        SentimentLabel,
+        score_to_label,
+        sentiment_match_with_tolerance,
+        label_match_score,
+        detect_mixed_sentiment_indicators,
+        DEFAULT_TOLERANCE,
+    )
 
 
 def normalize_text(s: str) -> str:
